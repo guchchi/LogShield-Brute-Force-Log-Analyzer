@@ -80,7 +80,7 @@ Only fake/local IPs and fake usernames are used.
 ### Run
 
 ```bash
-git clone <repo-url>
+git clone <https://github.com/guchchi/LogShield-Brute-Force-Log-Analyzer.git>
 cd LogShield
 python main.py
 ```
