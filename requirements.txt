@@ -1,0 +1,13 @@
+# LogShield - Brute Force Detection & Log Analysis Tool
+#
+# This project uses only Python standard library modules.
+# No external dependencies are required.
+#
+# Modules used:
+#   - re (regular expressions for log parsing)
+#   - json (JSON report generation)
+#   - collections.defaultdict (data aggregation)
+#   - os, datetime (file operations, timestamps)
+#
+# To run:
+#   python main.py

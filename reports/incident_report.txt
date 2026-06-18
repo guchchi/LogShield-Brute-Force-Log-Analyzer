@@ -1,0 +1,52 @@
+============================================================
+  LogShield Security Incident Report
+============================================================
+  Generated: 2026-06-18 19:01:06
+  Source:    sample_logs.txt
+
+------------------------------------------------------------
+  Summary
+------------------------------------------------------------
+  Total Login Events:      27
+  Failed Login Attempts:   21
+  Successful Logins:       6
+  Suspicious IPs Found:    5
+  Usernames Targeted:      admin, backup, dev_user, guest, nobody, root, svc_account, test
+
+  [High] Suspicious IP: 10.0.0.21
+  Detection Reasons:
+    - 5 failed login attempts
+    - Successful login after multiple failed attempts
+
+  [High] Suspicious IP: 10.0.0.55
+  Detection Reasons:
+    - Successful login after multiple failed attempts
+
+  [High] Suspicious IP: 172.16.0.88
+  Detection Reasons:
+    - Successful login after multiple failed attempts
+
+  [High] Suspicious IP: 192.168.1.100
+  Detection Reasons:
+    - 7 failed login attempts
+    - 6 different usernames targeted: admin, backup, nobody, root, svc_account, test
+
+  [High] Suspicious IP: 192.168.1.45
+  Detection Reasons:
+    - 6 failed login attempts
+    - 3 different usernames targeted: admin, root, test
+    - Successful login after multiple failed attempts
+
+------------------------------------------------------------
+  Recommended Defensive Actions
+------------------------------------------------------------
+  * Block or monitor suspicious IP addresses at the firewall
+  * Enable account lockout policy after 5 failed attempts
+  * Force password reset for compromised accounts
+  * Rate-limit login attempts per IP address
+  * Require multi-factor authentication (MFA) for all accounts
+  * Review authentication logs for unusual patterns
+
+============================================================
+  End of Report
+============================================================
