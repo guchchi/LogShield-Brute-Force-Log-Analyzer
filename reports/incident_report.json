@@ -1,6 +1,6 @@
 {
   "report_title": "LogShield Security Incident Report",
-  "generated_at": "2026-06-25 09:56:06",
+  "generated_at": "2026-06-25 10:42:59",
   "summary": {
     "total_events": 27,
     "failed_logins": 21,
@@ -77,12 +77,12 @@
     }
   ],
   "severity_map": {
-    "10.0.0.55": "High",
     "192.168.1.100": "High",
-    "172.16.0.88": "High",
+    "10.0.0.55": "High",
+    "192.168.1.45": "High",
     "10.0.0.21": "High",
-    "10.0.0.15": "None",
-    "192.168.1.45": "High"
+    "172.16.0.88": "High",
+    "10.0.0.15": "None"
   },
   "recommended_actions": [
     "Block or monitor suspicious IP addresses at the firewall",
