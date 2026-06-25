@@ -1,0 +1,15 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.backends._legacy:_Backend"
+
+[project]
+name = "logshield"
+version = "1.0.0"
+description = "Brute force detection and log analysis tool"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+keywords = ["cybersecurity", "log-analysis", "brute-force-detection", "incident-response", "defensive-security"]
+
+[project.urls]
+Source = "https://github.com/guchchi/LogShield-Brute-Force-Log-Analyzer"

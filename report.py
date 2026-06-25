@@ -1,13 +1,15 @@
 import json
 from datetime import datetime
+from typing import Any, Dict, List, Set
+
+ReportData = Dict[str, Any]
 
 
-def generate_report(parsed_logs, findings, severity_map):
-    """Generate a structured incident report from detection results.
-
-    Produces both a human-readable text report and a JSON report
-    suitable for further processing or ingestion by other tools.
-    """
+def generate_report(
+    parsed_logs: List[Dict[str, str]],
+    findings: List[Dict[str, Any]],
+    severity_map: Dict[str, str],
+) -> ReportData:
     total_events = len(parsed_logs)
     failed_events = [e for e in parsed_logs if e["status"] == "FAILED"]
     success_events = [e for e in parsed_logs if e["status"] == "SUCCESS"]
@@ -17,7 +19,7 @@ def generate_report(parsed_logs, findings, severity_map):
         set(e["username"] for e in failed_events)
     )
 
-    report_data = {
+    report_data: ReportData = {
         "report_title": "LogShield Security Incident Report",
         "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "summary": {
@@ -36,14 +38,11 @@ def generate_report(parsed_logs, findings, severity_map):
     return report_data
 
 
-def _get_recommendations(severity_map):
-    """Generate recommended defensive actions based on severity levels found."""
-    actions = set()
+def _get_recommendations(severity_map: Dict[str, str]) -> List[str]:
+    actions: Set[str] = set()
 
-    # Base recommendation for any suspicious activity
     actions.add("Review authentication logs for unusual patterns")
 
-    # Check if any high-severity IPs were found
     if "High" in severity_map.values():
         actions.add("Enable account lockout policy after 5 failed attempts")
         actions.add("Require multi-factor authentication (MFA) for all accounts")
@@ -58,8 +57,7 @@ def _get_recommendations(severity_map):
     return sorted(actions)
 
 
-def print_terminal_report(report_data):
-    """Display a clean, professional summary in the terminal."""
+def print_terminal_report(report_data: ReportData) -> None:
     s = report_data["summary"]
 
     print("=" * 50)
@@ -94,8 +92,7 @@ def print_terminal_report(report_data):
     print("=" * 50)
 
 
-def save_text_report(report_data, filepath):
-    """Save a human-readable incident report to a text file."""
+def save_text_report(report_data: ReportData, filepath: str) -> None:
     s = report_data["summary"]
 
     with open(filepath, "w", encoding="utf-8") as f:
@@ -137,8 +134,7 @@ def save_text_report(report_data, filepath):
     print(f"  [OK] Text report saved: {filepath}")
 
 
-def save_json_report(report_data, filepath):
-    """Save a structured JSON incident report."""
+def save_json_report(report_data: ReportData, filepath: str) -> None:
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(report_data, f, indent=2)
 

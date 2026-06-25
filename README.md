@@ -1,26 +1,31 @@
+<div align="center">
+
 # LogShield — Brute Force Detection & Log Analysis Tool
 
-LogShield is a beginner-friendly **defensive cybersecurity project** that
-analyzes authentication logs, detects suspicious login behavior, and
-generates a simple incident-style report.
+**Log analysis · threat detection · severity scoring · incident-style reporting**
 
-> ⚠️ **Safety Note:** This project is **defensive and educational**. It uses
-> fake sample logs only. It does not attack, scan, or interact with real
-> systems.
+[![Python](https://img.shields.io/badge/python-3.8%2B-blue)](https://python.org)
+[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+[![Code style](https://img.shields.io/badge/code%20style-strict-black)](https://github.com/psf/black)
+[![Dependencies](https://img.shields.io/badge/dependencies-none-brightgreen)](requirements.txt)
+
+</div>
+
+LogShield is a defensive Python tool that analyzes authentication logs and detects suspicious login behavior. It identifies brute-force patterns, assigns severity levels, and generates incident-style reports.
+
+> This project was built for the **IIT Kanpur B.Cyber program** portfolio. It demonstrates SOC/SIEM-style thinking, log analysis, and defensive incident response.
 
 ---
 
-## What This Project Demonstrates
+## Quick Start
 
-| Skill Area | What You Learn |
-|---|---|
-| Log Analysis | Parsing and interpreting authentication logs |
-| Brute-force Detection | Identifying rapid failed login attempts |
-| Threat Detection Logic | Rule-based detection of suspicious patterns |
-| Incident Response | Generating structured security reports |
-| Defensive Cybersecurity | Monitoring, detecting, and recommending actions |
-| SIEM/SOC Basics | Event correlation and severity scoring |
-| Python Scripting | File I/O, regex, data structures, report generation |
+```bash
+git clone https://github.com/guchchi/LogShield-Brute-Force-Log-Analyzer.git
+cd LogShield-Brute-Force-Log-Analyzer
+python main.py
+```
+
+Zero external dependencies — Python standard library only.
 
 ---
 
@@ -30,73 +35,45 @@ generates a simple incident-style report.
 sample_logs.txt → Parsing → Detection Rules → Severity Scoring → Incident Report
 ```
 
-1. **Read** — Load sample authentication logs from a text file
-2. **Parse** — Extract timestamp, status, username, and IP from each line
-3. **Detect** — Run four detection rules to find suspicious activity
-4. **Score** — Assign severity (Low / Medium / High) to each suspicious IP
-5. **Report** — Print terminal summary and save reports to `reports/`
+| Step | What Happens |
+|---|---|
+| 1 | Read authentication log entries from `sample_logs.txt` |
+| 2 | Parse each line into timestamp, status, username, and IP |
+| 3 | Run three detection rules against aggregated data |
+| 4 | Assign severity per IP (Low / Medium / High) |
+| 5 | Print terminal report and save text + JSON reports |
 
 ---
 
 ## Detection Rules
 
-| Rule | What It Detects | Why It Matters |
+| Rule | Threshold | Indicates |
 |---|---|---|
-| Failed Login Threshold | 5+ failed attempts from one IP | Indicates automated brute-force attack |
-| Multiple Username Attempts | 3+ different usernames from one IP | Password spraying or user enumeration |
-| Success After Failures | Successful login after repeated fails | Brute-force attack succeeded |
-| Severity Scoring | Combined risk level per IP | Prioritizes incident response |
+| Failed Login Threshold | 5+ failures from one IP | Automated brute-force attack |
+| Multiple Username Attempts | 3+ usernames from one IP | Password spraying or user enumeration |
+| Success After Failures | Any success following failures | Brute-force attack succeeded |
 
 ---
 
-## Sample Log Format
+## Usage
 
-```
-2026-06-18 10:01:11 FAILED username=admin ip=192.168.1.45
-2026-06-18 10:02:10 SUCCESS username=admin ip=192.168.1.45
+```bash
+python main.py
 ```
 
-Only fake/local IPs and fake usernames are used.
+Reads `sample_logs.txt`, runs the detection engine, and outputs:
+
+- Terminal summary with suspicious IPs and severity
+- `reports/incident_report.txt` — human-readable incident report
+- `reports/incident_report.json` — structured data for automation
 
 ---
 
 ## Screenshots
 
-| Screenshot | Description |
-|---|---|
-| ![Terminal Output](screenshots/terminal-output.png) | Clean terminal output showing the security report |
-| ![Generated Report](screenshots/generated-report.png) | Text report saved to `reports/incident_report.txt` |
-| ![JSON Report](screenshots/json-report.png) | JSON report saved to `reports/incident_report.json` |
-
----
-
-## Setup
-
-### Prerequisites
-
-- Python 3.6+
-- No external dependencies (uses only standard library)
-
-### Run
-
-```bash
-git clone <https://github.com/guchchi/LogShield-Brute-Force-Log-Analyzer.git>
-cd LogShield
-python main.py
-```
-
-Expected output:
-
-```
-==============================
-LogShield Security Report
-==============================
-
-  Total Events:    28
-  Failed Logins:   22
-  Successful Logins: 6
-  Suspicious IPs:  3
-```
+| Terminal Output | Text Report | JSON Report |
+|---|---|---|
+| ![Terminal](screenshots/terminal-output.png) | ![Text](screenshots/generated-report.png) | ![JSON](screenshots/json-report.png) |
 
 ---
 
@@ -104,50 +81,40 @@ LogShield Security Report
 
 ```
 LogShield/
-├── main.py              # Entry point
-├── detector.py          # Detection engine
-├── report.py            # Report generator
-├── sample_logs.txt      # Sample authentication logs
-├── requirements.txt     # Dependencies (standard library only)
-├── README.md            # This file
-├── SECURITY.md          # Security policy
-├── .gitignore
-├── reports/             # Generated incident reports
-│   ├── incident_report.txt
-│   └── incident_report.json
-├── screenshots/         # Screenshots for README
+├── main.py                # Entry point
+├── detector.py            # Detection engine (parse, analyze, rules)
+├── report.py              # Report generation (terminal, text, JSON)
+├── sample_logs.txt        # Sample authentication logs
+├── pyproject.toml         # Package metadata
+├── CHANGELOG.md           # Version history
+├── LICENSE                # MIT license
+├── SECURITY.md            # Security policy
+├── requirements.txt       # Dependencies (standard library only)
+├── reports/               # Generated incident reports
+├── screenshots/           # README screenshots
 └── docs/
     └── PORTFOLIO_SUMMARY.md
 ```
 
 ---
 
-## What I Learned
+## Cybersecurity Learning Summary
 
-- How login logs can reveal attack patterns
-- How brute-force attacks appear in authentication data
-- Why continuous monitoring matters in cybersecurity
-- Why logs are a critical source of security intelligence
-- How defensive tools detect and flag suspicious activity
-- Basics of SOC/SIEM thinking — event correlation, severity,
-  and incident response
+Authentication logs are one of the richest sources of security intelligence. This project taught me:
 
----
-
-## Portfolio Relevance
-
-This project supports my cybersecurity portfolio by demonstrating:
-
-- Defensive security thinking
-- Log analysis and detection logic
-- Incident-style reporting
-- Python scripting for security tools
-
-It was built as part of my application to the **IIT Kanpur B.Cyber program**
-and reflects my commitment to learning defensive cybersecurity fundamentals.
+- How brute-force and password-spraying patterns appear in log data
+- Why correlating events by IP and username reveals attack behavior
+- How severity scoring helps prioritize incident response
+- That structured reporting connects detection to action
 
 ---
 
 ## License
 
-This project is for educational and portfolio use only.
+MIT — see [LICENSE](LICENSE).
+
+---
+
+<div align="center">
+  <sub>Built for the IIT Kanpur B.Cyber program · Defensive cybersecurity portfolio project</sub>
+</div>
